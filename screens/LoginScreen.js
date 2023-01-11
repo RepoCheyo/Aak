@@ -3,7 +3,7 @@ import React from 'react';
 
 const LoginScreen = () => {
   return (
-    <View>
+    <View style={{backgroundColor: 'white', height: '100%'}}>
       <Text>LoginScreen</Text>
     </View>
   );

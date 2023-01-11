@@ -1,14 +1,8 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
-import {windowHeight, windowWidth} from '../utils/Dimentions';
+import {windowHeight} from '../utils/Dimentions';
 
-const SocialButton = ({
-  buttonTitle,
-  btnType,
-  color,
-  backgroundColor,
-  ...rest
-}) => {
+const SocialButton = ({buttonTitle, color, backgroundColor, ...rest}) => {
   let bgColor = backgroundColor;
   return (
     <TouchableOpacity
@@ -25,12 +19,12 @@ export default SocialButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    marginTop: 10,
-    width: '95%',
-    height: windowHeight / 15,
+    marginBottom: 15,
+    width: '90%',
+    height: windowHeight / 10,
     padding: 10,
     flexDirection: 'row',
-    borderRadius: 90,
+    borderRadius: 15,
   },
 
   btnTxtWrapper: {
@@ -40,6 +34,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Inter-ExtraBold',
   },
 });
