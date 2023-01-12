@@ -1,20 +1,27 @@
-import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  ImageBackground,
+} from 'react-native';
 import React from 'react';
 import CustomButton from '../components/CustomButton';
+import {windowHeight} from '../utils/Dimentions';
 
 const AuthScreen = ({navigation}) => {
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <View style={styles.logoContainer}>
-        {/* <Image
-          style={styles.imgLogo}
-          source={require('../assets/images/helmet-3d.webp')}
-        /> */}
-        <Text style={styles.textLogo}>FastFix</Text>
-        <Text style={styles.subLogoText}>
-          Tus pendientes en casa solucionados con un tap
-        </Text>
-      </View>
+    <SafeAreaView>
+      <ImageBackground
+        resizeMode="cover"
+        source={require('../assets/images/Handyman-Service-bg.jpg')}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.textLogo}>FastFix</Text>
+          <Text style={styles.subLogoText}>
+            Tus pendientes en casa solucionados con un tap
+          </Text>
+        </View>
+      </ImageBackground>
       <View style={styles.buttonContainer}>
         <CustomButton
           buttonTitle="Inicia Sesión"
@@ -34,34 +41,29 @@ const AuthScreen = ({navigation}) => {
 };
 
 let styles = StyleSheet.create({
-  mainContainer: {
-    height: '100%',
-    backgroundColor: '#ffff',
-  },
   logoContainer: {
     alignItems: 'center',
+    justifyContent: 'center',
     height: '65%',
+    backgroundColor: '#000000c0',
+    top: windowHeight / 10,
   },
   textLogo: {
     fontFamily: 'Inter-Black',
     fontSize: 100,
-    color: '#f0f0f0',
+    color: '#fdc500',
     textAlign: 'center',
   },
   subLogoText: {
     fontFamily: 'Inter-Medium',
     fontSize: 13,
-    color: '#000',
+    color: '#f0f0f0',
   },
-  // imgLogo: {
-  //   width: 300,
-  //   height: 300,
-  // },
   buttonContainer: {
     alignItems: 'center',
-    flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#ffff',
+    height: '35%',
   },
 });
 
