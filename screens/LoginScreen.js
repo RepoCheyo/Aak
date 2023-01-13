@@ -5,35 +5,43 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import CustomInput from '../components/CustomInput';
-import CountryPicker from 'react-native-country-picker-modal';
 import CustomButton from '../components/CustomButton';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {AuthContext} from '../utils/AuthContext';
 
 const LoginScreen = () => {
+  // const {login} = useContext(AuthContext);
+
+  const [loading, setLoading] = useState(false);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <ScrollView style={{backgroundColor: 'white', height: '100%', flex: 1}}>
         <View style={styles.askContainer}>
-          <Text style={styles.askTitle}>¿Cual es tu número?</Text>
+          <Text style={styles.askTitle}>Bienvenido de nuevo</Text>
           <Text style={styles.askSubtitle}>
-            Enviaremos un código para que inicies sesión
+            Ingresa tus datos para iniciar sesión
           </Text>
         </View>
         <View style={styles.inputsContainer}>
-          <View style={styles.countryContainer}>
-            <CountryPicker countryCode="MX" withFilter withCallingCode />
-            <Entypo name="chevron-small-down" size={22} />
-          </View>
-          <View style={styles.phoneInputCont}>
+          <View style={styles.emailInputCont}>
             <CustomInput
               width="80%"
               selectionColor={'gray'}
-              keyboardType="numeric"
-              placeholder="2246589671"
+              keyboardType="text"
+              placeholder="ejemplo@gmail.com"
+            />
+          </View>
+
+          <View style={styles.emailInputCont}>
+            <CustomInput
+              width="80%"
+              selectionColor={'gray'}
+              keyboardType="text"
+              placeholder="Contraseña"
+              secureTextEntry={true}
             />
           </View>
         </View>
@@ -42,26 +50,9 @@ const LoginScreen = () => {
             buttonTitle="Enviar"
             color="#ffff"
             backgroundColor="#fdc500"
-            onPress={() => console.log('Enviado')}
+            onPress={console.log('Logged')}
           />
         </View>
-        <View style={{alignItems: 'center', marginTop: 20}}>
-          <Text style={styles.orText}>O también</Text>
-        </View>
-        <TouchableOpacity
-          style={{
-            alignItems: 'center',
-            marginTop: 30,
-          }}>
-          <Text
-            style={{
-              color: '#0098FD',
-              fontFamily: 'Inter-Bold',
-              fontSize: 16,
-            }}>
-            Ingresa con tu E-mail
-          </Text>
-        </TouchableOpacity>
       </ScrollView>
     </TouchableWithoutFeedback>
   );
@@ -76,11 +67,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   inputsContainer: {
-    flex: 0.1,
-    flexDirection: 'row',
+    flexDirection: 'column',
   },
-  phoneInputCont: {
-    flex: 0.9,
+  emailInputCont: {
+    margin: 5,
   },
   countryContainer: {
     flex: 0.2,
