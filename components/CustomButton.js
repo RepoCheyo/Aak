@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import {windowHeight} from '../utils/Dimentions';
 
-const SocialButton = ({buttonTitle, color, backgroundColor, ...rest}) => {
+const CustomButton = ({buttonTitle, color, backgroundColor, ...rest}) => {
   let bgColor = backgroundColor;
   return (
     <TouchableOpacity
@@ -15,7 +15,7 @@ const SocialButton = ({buttonTitle, color, backgroundColor, ...rest}) => {
   );
 };
 
-export default SocialButton;
+export default CustomButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {

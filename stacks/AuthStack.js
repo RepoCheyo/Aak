@@ -4,6 +4,7 @@ import AuthScreen from '../screens/AuthScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import BackButton from '../components/BackButton';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,20 +19,35 @@ const AuthStack = () => {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{
+        options={({navigation}) => ({
           title: '',
+          headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: '#ffff',
+            backgroundColor: '#fff',
             shadowColor: '#ffff',
             elevation: 0,
           },
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Auth')} />
+          ),
+        })}
       />
 
       <Stack.Screen
         name="Signup"
         component={SignUpScreen}
-        options={{title: 'Registrate'}}
+        options={({navigation}) => ({
+          title: '',
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: '#fff',
+            shadowColor: '#ffff',
+            elevation: 0,
+          },
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Auth')} />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
