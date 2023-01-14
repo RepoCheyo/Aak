@@ -6,15 +6,27 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useMemo, useState} from 'react';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import {AuthContext} from '../utils/AuthContext';
 
 const LoginScreen = () => {
-  // const {login} = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
+
+  const [email, setEmail] = useState([]);
+  const [password, setPassword] = useState([]);
 
   const [loading, setLoading] = useState(false);
+
+  const handleLogin = () => {
+    setLoading(true);
+    setLoading(false);
+  };
+
+  const isFormValid = useMemo(() => {
+    return email.length > 0 && password.length > 0;
+  }, [email, password]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -30,13 +42,17 @@ const LoginScreen = () => {
             <CustomInput
               width="80%"
               selectionColor={'gray'}
-              keyboardType="text"
+              onChangeText={userEmail => setEmail(userEmail)}
+              autoCorrect={false}
+              keyboardType="email-address"
               placeholder="ejemplo@gmail.com"
             />
           </View>
 
           <View style={styles.emailInputCont}>
             <CustomInput
+              labelValue={password}
+              onChangeText={userPassword => setPassword(userPassword)}
               width="80%"
               selectionColor={'gray'}
               keyboardType="text"
@@ -47,10 +63,11 @@ const LoginScreen = () => {
         </View>
         <View style={{alignItems: 'center', marginTop: 20}}>
           <CustomButton
-            buttonTitle="Enviar"
+            buttonTitle="Ingresar"
             color="#ffff"
             backgroundColor="#fdc500"
-            onPress={console.log('Logged')}
+            onPress={() => login(email, password)}
+            disabled={!isFormValid}
           />
         </View>
       </ScrollView>

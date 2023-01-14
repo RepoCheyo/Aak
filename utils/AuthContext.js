@@ -17,10 +17,10 @@ export const AuthProvider = ({children}) => {
           try {
             await auth().signInWithEmailAndPassword(email, password);
           } catch (e) {
-            console.log(e);
+            alert(e);
           }
         },
-        register: async (email, password) => {
+        singup: async (email, password) => {
           try {
             await auth()
               .createUserWithEmailAndPassword(email, password)
@@ -31,15 +31,14 @@ export const AuthProvider = ({children}) => {
                   .collection('users')
                   .doc(auth().currentUser.uid)
                   .set({
-                    fname: '',
-                    lname: '',
+                    name: '',
                     email: email,
                     createdAt: firestore.Timestamp.fromDate(new Date()),
                     userImg: null,
                   })
                   //ensure we catch any errors at this stage to advise us if something does go wrong
                   .catch(error => {
-                    console.log(
+                    alert(
                       'Something went wrong with added user to firestore: ',
                       error,
                     );
@@ -47,17 +46,17 @@ export const AuthProvider = ({children}) => {
               })
               //we need to catch the whole sign up process if it fails too.
               .catch(error => {
-                console.log('Something went wrong with sign up: ', error);
+                alert('Something went wrong with sign up: ', error);
               });
           } catch (e) {
-            console.log(e);
+            alert(e);
           }
         },
         logout: async () => {
           try {
             await auth().signOut();
           } catch (e) {
-            console.log(e);
+            alert(e);
           }
         },
       }}>
