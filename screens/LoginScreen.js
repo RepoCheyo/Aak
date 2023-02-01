@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useContext, useMemo, useState} from 'react';
 import CustomInput from '../components/CustomInput';
@@ -19,8 +20,9 @@ const LoginScreen = () => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const handleLogin = (email, password) => {
     setLoading(true);
+    login(email, password);
     setLoading(false);
   };
 
@@ -63,12 +65,18 @@ const LoginScreen = () => {
         </View>
         <View style={{alignItems: 'center', marginTop: 20}}>
           <CustomButton
-            buttonTitle="Ingresar"
+            buttonTitle={loading ? 'Ingresando' : 'Ingresar'}
             color="#ffff"
-            backgroundColor="#fdc500"
-            onPress={() => login(email, password)}
+            backgroundColor={isFormValid ? '#fdc500' : '#ffec5c'}
+            onPress={() => handleLogin(email, password)}
             disabled={!isFormValid}
           />
+        </View>
+
+        <View style={{alignItems: 'center', marginTop: 20}}>
+          <TouchableOpacity>
+            <Text style={styles.fgpassword}>¿Olvidaste tu contraseña?</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </TouchableWithoutFeedback>
@@ -89,16 +97,6 @@ const styles = StyleSheet.create({
   emailInputCont: {
     margin: 5,
   },
-  countryContainer: {
-    flex: 0.2,
-    marginLeft: 20,
-    flexDirection: 'row',
-    backgroundColor: '#d9d9d9',
-    alignItems: 'center',
-    padding: 8,
-    height: 50,
-    borderRadius: 10,
-  },
   askTitle: {
     color: '#000',
     fontSize: 30,
@@ -113,5 +111,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Inter-Medium',
     color: '#a9a9a9',
+  },
+  fgpassword: {
+    fontFamily: 'Inter-Bold',
+    color: '#0099FB',
   },
 });

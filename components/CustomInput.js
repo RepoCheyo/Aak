@@ -25,9 +25,12 @@ export default CustomInput;
 const styles = StyleSheet.create({
   inputContainer: {alignItems: 'center'},
   input: {
-    backgroundColor: '#d9d9d9',
+    backgroundColor: '#f1f1f1',
+    borderColor: 'red',
+    borderStyle: 'solid',
     paddingRight: 12,
     paddingLeft: 12,
     borderRadius: 10,
+    fontFamily: 'Inter-Regular',
   },
 });

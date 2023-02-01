@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 
 import React from 'react';
-import AppWrap from './AppWrap';
 import AppContainer from './stacks/index';
 
 const App = () => {

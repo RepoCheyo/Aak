@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
             alert(e);
           }
         },
-        singup: async (email, password) => {
+        singUpCustomer: async (email, password) => {
           try {
             await auth()
               .createUserWithEmailAndPassword(email, password)
@@ -28,13 +28,48 @@ export const AuthProvider = ({children}) => {
                 //Once the user creation has happened successfully, we can add the currentUser into firestore
                 //with the appropriate details.
                 firestore()
-                  .collection('users')
+                  .collection('customers')
                   .doc(auth().currentUser.uid)
                   .set({
-                    name: '',
+                    name: username,
                     email: email,
                     createdAt: firestore.Timestamp.fromDate(new Date()),
                     userImg: null,
+                  })
+                  //ensure we catch any errors at this stage to advise us if something does go wrong
+                  .catch(error => {
+                    alert(error);
+                  });
+              })
+              //we need to catch the whole sign up process if it fails too.
+              .catch(error => {
+                alert(error);
+              });
+          } catch (e) {
+            alert(e);
+          }
+        },
+        singUpFixer: async (email, password) => {
+          try {
+            await auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(() => {
+                //Once the user creation has happened successfully, we can add the currentUser into firestore
+                //with the appropriate details.
+                firestore()
+                  .collection('fixers')
+                  .doc(auth().currentUser.uid)
+                  .set({
+                    aproved: false,
+                    userImg: null,
+                    name: fname,
+                    email: email,
+                    categories: null,
+                    description: null,
+                    paymentMethods: null,
+                    dob: null,
+                    location: null,
+                    createdAt: firestore.Timestamp.fromDate(new Date()),
                   })
                   //ensure we catch any errors at this stage to advise us if something does go wrong
                   .catch(error => {
