@@ -11,6 +11,7 @@ import React, {useContext, useMemo, useState} from 'react';
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import {AuthContext} from '../utils/AuthContext';
+import ProfilePicture from '../components/ProfilePicture';
 
 const SignUpScreen = () => {
   const {singUpCustomer} = useContext(AuthContext);
@@ -20,12 +21,6 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState('');
 
   const [loading, setLoading] = useState(false);
-
-  // const handleSignUpCustomer = (email, password) => {
-  //   setLoading(true);
-  //   SignUpCustomer(email, password);
-  //   setLoading(false);
-  // };
 
   const isFormValid = useMemo(() => {
     return email.length > 0 && password.length > 0 && username.length > 0;
@@ -40,6 +35,11 @@ const SignUpScreen = () => {
             Ingresa tus datos para registrarte
           </Text>
         </View>
+
+        <ProfilePicture
+          source={require('../assets/images/defaultProfilePicture.jpg')}
+        />
+
         <View style={styles.inputsContainer}>
           <View style={styles.emailInputCont}>
             <CustomInput
@@ -80,7 +80,7 @@ const SignUpScreen = () => {
             buttonTitle={loading ? 'Ingresando' : 'Listo!'}
             color="#ffff"
             backgroundColor={isFormValid ? '#fdc500' : '#ffec5c'}
-            onPress={() => singUpCustomer(username, email, password)}
+            onPress={() => singUpCustomer(email, password, username)}
             disabled={!isFormValid}
           />
         </View>

@@ -20,22 +20,24 @@ export const AuthProvider = ({children}) => {
             alert(e);
           }
         },
-        singUpCustomer: async (email, password) => {
+        singUpCustomer: async (email, password, username, profileP) => {
           try {
             await auth()
               .createUserWithEmailAndPassword(email, password)
               .then(() => {
                 //Once the user creation has happened successfully, we can add the currentUser into firestore
                 //with the appropriate details.
+
                 firestore()
                   .collection('customers')
                   .doc(auth().currentUser.uid)
                   .set({
                     name: username,
                     email: email,
+                    userImg: profileP,
                     createdAt: firestore.Timestamp.fromDate(new Date()),
-                    userImg: null,
                   })
+
                   //ensure we catch any errors at this stage to advise us if something does go wrong
                   .catch(error => {
                     alert(error);
